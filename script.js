@@ -140,3 +140,39 @@ interactiveCards.forEach(card => {
         });
     });
 });
+
+// Resume Modal Logic
+const resumeLink = document.getElementById('resume-link');
+const resumeModal = document.getElementById('resume-modal');
+const closeModal = document.querySelector('.close-modal');
+const modalOverlay = document.querySelector('.modal-overlay');
+
+function openResumeModal(e) {
+    if (e) e.preventDefault();
+    resumeModal.classList.add('active');
+    document.body.classList.add('modal-open');
+}
+
+function closeResumeModal() {
+    resumeModal.classList.remove('active');
+    document.body.classList.remove('modal-open');
+}
+
+if (resumeLink) {
+    resumeLink.addEventListener('click', openResumeModal);
+}
+
+if (closeModal) {
+    closeModal.addEventListener('click', closeResumeModal);
+}
+
+if (modalOverlay) {
+    modalOverlay.addEventListener('click', closeResumeModal);
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
+        closeResumeModal();
+    }
+});
