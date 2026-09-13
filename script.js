@@ -40,6 +40,12 @@ navLinks.addEventListener('mouseleave', () => {
 // Smooth Scrolling for Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+
+        const targetElement = document.querySelector(targetId);
+        if (!targetElement) return;
+
         e.preventDefault();
 
         // Close mobile menu if open
@@ -47,39 +53,95 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         navLinks.classList.remove('active');
         document.body.style.overflow = 'initial';
 
-
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
+        targetElement.scrollIntoView({
             behavior: 'smooth'
         });
     });
 });
 
-// Form Submission (Direct Email via mailto)
-document.getElementById("contact-form").addEventListener("submit", function (event) {
-    event.preventDefault();
+// Form Submission (Direct Email via Webmail & Mailto)
+const contactForm = document.getElementById("contact-form");
+const formStatus = document.getElementById("form-status");
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+if (contactForm) {
+    contactForm.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-    // Construct the mailto URL
-    const subject = encodeURIComponent(`Portfolio Message from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\r\nEmail: ${email}\r\n\r\nMessage:\r\n${message}`);
-    const mailtoUrl = `mailto:haribala112006@gmail.com?subject=${subject}&body=${body}`;
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
 
-    // Create a temporary link and click it (more reliable than window.location)
-    const tempLink = document.createElement('a');
-    tempLink.href = mailtoUrl;
-    document.body.appendChild(tempLink);
-    tempLink.click();
-    document.body.removeChild(tempLink);
+        if (!name || !email || !message) return;
 
-    // Give a brief hint to the user
-    setTimeout(() => {
-        alert("Redirecting to your email app... If it doesn't open, please check if you have a default mail client set up.");
-        this.reset();
-    }, 500);
-});
+        const recipientEmail = "haribala112006@gmail.com";
+        const subjectText = `Portfolio Message from ${name}`;
+        const bodyText = `Name: ${name}\r\nEmail: ${email}\r\n\r\nMessage:\r\n${message}`;
+
+        const subject = encodeURIComponent(subjectText);
+        const body = encodeURIComponent(bodyText);
+
+        // Webmail direct compose URL (works flawlessly in browser without requiring an OS desktop mail client)
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipientEmail}&su=${subject}&body=${body}`;
+        const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+
+        // Detect mobile vs desktop
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            window.location.href = mailtoUrl;
+        } else {
+            // Open Gmail compose directly in a new tab (avoids about:blank freeze caused by conflicting mailto trigger)
+            const link = document.createElement('a');
+            link.href = gmailUrl;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Show elegant in-form status with interactive fallbacks (no alert dialog)
+        if (formStatus) {
+            formStatus.className = 'form-status success';
+            formStatus.style.display = 'block';
+            formStatus.innerHTML = `
+                <div class="status-header">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Opening Email Composer...</span>
+                </div>
+                <p class="status-desc">Your message has been drafted for <strong>${recipientEmail}</strong>. If your email didn't open automatically, choose an option below:</p>
+                <div class="status-actions">
+                    <a href="${gmailUrl}" target="_blank" rel="noopener noreferrer" class="status-btn primary">
+                        <i class="fab fa-google"></i> Open in Gmail
+                    </a>
+                    <a href="${mailtoUrl}" class="status-btn">
+                        <i class="fas fa-envelope"></i> Default Mail App
+                    </a>
+                    <button type="button" class="status-btn" id="copy-msg-btn">
+                        <i class="fas fa-copy"></i> <span id="copy-text">Copy Message</span>
+                    </button>
+                </div>
+            `;
+
+            const copyBtn = document.getElementById("copy-msg-btn");
+            if (copyBtn) {
+                copyBtn.addEventListener("click", function () {
+                    const fullText = `To: ${recipientEmail}\nSubject: ${subjectText}\n\n${bodyText}`;
+                    navigator.clipboard.writeText(fullText).then(() => {
+                        const copyText = document.getElementById("copy-text");
+                        if (copyText) copyText.textContent = "Copied!";
+                        setTimeout(() => {
+                            if (copyText) copyText.textContent = "Copy Message";
+                        }, 2500);
+                    }).catch(() => {
+                        const copyText = document.getElementById("copy-text");
+                        if (copyText) copyText.textContent = "Failed to copy";
+                    });
+                });
+            }
+        }
+    });
+}
 
 // Intersection Observer for Scroll Animations
 const observerOptions = {
