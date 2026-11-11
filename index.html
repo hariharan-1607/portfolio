@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Hariharan">
-    <meta name="description" content="Portfolio Website - MERN Stack Developer">
-    <title>Hariharan Portfolio | Front-End Developer</title>
+    <meta name="author" content="Hariharan M">
+    <meta name="description"
+        content="Hariharan M - Aspiring Software Developer | ECE Undergraduate. Portfolio showcasing frontend development, embedded systems projects, internships, certifications and achievements.">
+    <title>Hariharan M | Aspiring Software Developer</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -21,13 +23,18 @@
         <div class="container nav-container">
             <a href="#home" class="logo">Hariharan<span>.</span></a>
             <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#internships" class="nav-link">Internships</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#achievements" class="nav-link">Achievements</a></li>
                 <li><a href="#" id="resume-link">Resume</a></li>
-                <li><a href="#contact" class="cta-btn">Contact Me</a></li>
+                <li><a href="#contact" class="cta-btn nav-link">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" aria-label="Toggle Navigation" role="button" tabindex="0">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
@@ -39,18 +46,31 @@
             <div class="hero-content">
                 <p class="subtitle">Hello, I'm</p>
                 <h1>Hariharan M</h1>
-                <h2 class="typing-text">Front-End Developer <span></span></h2>
-                <p class="description">Specializing in the Front-End Development. I build scalable, user-friendly web
-                    applications
-                    that solve real-world problems.</p>
+                <h2 class="typing-text">Aspiring Software Developer | ECE Undergraduate</h2>
+                <p class="description">Motivated Electronics and Communication Engineering undergraduate with experience
+                    in frontend development, embedded systems and problem-solving using Java. Passionate about
+                    developing practical software and hardware solutions.</p>
                 <div class="hero-btns">
-                    <a href="#projects" class="btn primary-btn">View My Work</a>
+                    <a href="#projects" class="btn primary-btn">View My Projects</a>
                     <a href="#contact" class="btn secondary-btn">Contact Me</a>
+                </div>
+                <div class="hero-socials">
+                    <a href="https://github.com/hariharan-1607" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/haribala1617" target="_blank" rel="noopener noreferrer"
+                        aria-label="LinkedIn" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:haribala112006@gmail.com" aria-label="Email" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
                 </div>
             </div>
             <div class="hero-image">
                 <div class="img-wrapper">
-                    <img src="assets/profile.jpg" alt="Hariharan">
+                    <img src="assets/profile.jpg" alt="Hariharan M">
                 </div>
                 <div class="shape shape-1"></div>
                 <div class="shape shape-2"></div>
@@ -64,35 +84,40 @@
             <h2 class="section-title">About <span>Me</span></h2>
             <div class="about-wrapper">
                 <div class="about-text">
-                    <p>I am a passionate <strong>Front-End Developer</strong> with a strong foundation in
-                        <strong>HTML, CSS, React, Node.js</strong>. My journey in tech is driven by a
-                        curiosity to understand how things work and a desire to build solutions that make a difference.
+                    <p>I am currently pursuing <strong>B.E. Electronics and Communication Engineering</strong> at
+                        <strong>Sri Krishna College of Technology</strong>, with a strong interest in
+                        <strong>software development</strong> and <strong>embedded systems</strong>.
                     </p>
-                    <p>I am dedicated to writing clean, efficient, and well-documented code. When I'm not coding, I'm
-                        exploring new tech, contributing to open-source, or reading.</p>
+                    <p>I have programming knowledge in <strong>Java, Python, C and JavaScript</strong>, along with
+                        practical experience in frontend development using <strong>HTML, CSS and React</strong>.</p>
+                    <p>Beyond web development, I have hands-on experience developing hardware-based embedded projects
+                        using <strong>ESP32</strong> and communication modules, complemented by industrial internship
+                        exposure in <strong>automation, electrical panels, EV manufacturing and Microsoft 365-based
+                            automation</strong>.</p>
 
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <i class="fas fa-layer-group"></i>
-                            <h3>Front-End</h3>
-                            <p>Development</p>
-                            <span class="stat-desc">Building end-to-end web applications with seamless frontend and
-                                robust backend integration.</span>
+                            <i class="fas fa-code"></i>
+                            <h3>Frontend Dev</h3>
+                            <p>HTML, CSS &amp; React</p>
+                            <span class="stat-desc">Building clean, responsive interfaces using HTML, CSS, JavaScript
+                                and React.</span>
                         </div>
                         <div class="stat-item">
-                            <i class="fas fa-code"></i>
-                            <h3>Front-End</h3>
-                            <p>Specialist</p>
-                            <span class="stat-desc">Expertise in MongoDB, React, and Node.js for modern web
-                                solutions.</span>
+                            <i class="fas fa-microchip"></i>
+                            <h3>Embedded Systems</h3>
+                            <p>ESP32 &amp; Hardware</p>
+                            <span class="stat-desc">Developing hardware solutions using ESP32, sensors, LoRa and GPS
+                                modules.</span>
                         </div>
                         <div class="stat-item">
                             <i class="fas fa-brain"></i>
                             <h3>Problem Solving</h3>
-                            <span class="stat-desc">Analyzing complex challenges and implementing efficient algorithmic
-                                solutions.</span>
-                            <a href="https://leetcode.com/u/hariharan_1607/" target="_blank" class="leetcode-icon-link"
-                                title="LeetCode Profile">
+                            <p>Java, Python &amp; C</p>
+                            <span class="stat-desc">Applying core programming concepts in Java, Python, C and
+                                JavaScript to solve practical challenges.</span>
+                            <a href="https://leetcode.com/u/hariharan_1607/" target="_blank" rel="noopener noreferrer"
+                                class="leetcode-icon-link" title="LeetCode Profile">
                                 <span>LeetCode</span>
                             </a>
                         </div>
@@ -102,30 +127,71 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Technical Skills Section -->
     <section id="skills" class="section bg-light">
         <div class="container">
-            <h2 class="section-title">My <span>Skills</span></h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fab fa-java"></i>
-                    <h3>Java</h3>
-                    <p>Object-oriented programming, data structures, and backend development with Java.</p>
+            <h2 class="section-title">Technical <span>Skills</span></h2>
+            <div class="skills-categories-grid">
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Programming Languages</h3>
+                    </div>
+                    <div class="skill-badges">
+                        <span class="skill-badge"><i class="fab fa-java"></i> Java</span>
+                        <span class="skill-badge"><i class="fab fa-python"></i> Python</span>
+                        <span class="skill-badge"><i class="fas fa-terminal"></i> C</span>
+                        <span class="skill-badge"><i class="fab fa-js-square"></i> JavaScript</span>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fab fa-html5"></i>
-                    <h3>HTML & CSS</h3>
-                    <p>Semantic HTML5, CSS3, Flexbox, Grid, and Responsive Design.</p>
+
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fas fa-globe"></i>
+                        <h3>Web Technologies</h3>
+                    </div>
+                    <div class="skill-badges">
+                        <span class="skill-badge"><i class="fab fa-html5"></i> HTML</span>
+                        <span class="skill-badge"><i class="fab fa-css3-alt"></i> CSS</span>
+                        <span class="skill-badge"><i class="fab fa-react"></i> React</span>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fab fa-python"></i>
-                    <h3>Python</h3>
-                    <p>Scripting, data analysis, and general-purpose programming with Python.</p>
+
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fas fa-database"></i>
+                        <h3>Databases</h3>
+                    </div>
+                    <div class="skill-badges">
+                        <span class="skill-badge"><i class="fas fa-table"></i> MySQL</span>
+                        <span class="skill-badge"><i class="fas fa-leaf"></i> MongoDB Compass</span>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <i class="fab fa-cuttlefish"></i>
-                    <h3>C Programming</h3>
-                    <p>System programming, data structures, and efficient algorithm implementation.</p>
+
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fas fa-tools"></i>
+                        <h3>Tools and Platforms</h3>
+                    </div>
+                    <div class="skill-badges">
+                        <span class="skill-badge"><i class="fas fa-laptop-code"></i> VS Code</span>
+                        <span class="skill-badge"><i class="fab fa-github"></i> GitHub</span>
+                        <span class="skill-badge"><i class="fas fa-microchip"></i> Arduino IDE</span>
+                    </div>
+                </div>
+
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        <i class="fab fa-microsoft"></i>
+                        <h3>Microsoft Technologies</h3>
+                    </div>
+                    <div class="skill-badges">
+                        <span class="skill-badge"><i class="fab fa-microsoft"></i> Microsoft 365</span>
+                        <span class="skill-badge"><i class="fas fa-users"></i> Microsoft Teams</span>
+                        <span class="skill-badge"><i class="fas fa-share-alt"></i> SharePoint</span>
+                        <span class="skill-badge"><i class="fas fa-bolt"></i> Power Apps</span>
+                        <span class="skill-badge"><i class="fas fa-file-excel"></i> Excel VBA Macros</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -136,24 +202,404 @@
         <div class="container">
             <h2 class="section-title">Featured <span>Projects</span></h2>
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-icon-top">
-                        <i class="fas fa-file-invoice-dollar"></i>
+
+                <!-- Project 1: AgriDetect -->
+                <article class="project-card">
+                    <div class="project-visual">
+                        <span class="project-category-badge hardware">
+                            <i class="fas fa-microchip"></i> Hardware Project
+                        </span>
+                        <svg class="project-illustration" viewBox="0 0 280 140" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <defs>
+                                <linearGradient id="agriGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#6366f1" />
+                                    <stop offset="100%" stop-color="#ec4899" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="24" y="42" width="66" height="54" rx="8" fill="#0f172a" stroke="url(#agriGrad)"
+                                stroke-width="2" />
+                            <text x="57" y="73" text-anchor="middle" fill="#f1f5f9" font-size="11"
+                                font-family="Poppins, sans-serif" font-weight="600">ESP32</text>
+                            <circle cx="116" cy="57" r="10" fill="none" stroke="#6366f1" stroke-width="2" />
+                            <circle cx="116" cy="81" r="10" fill="none" stroke="#ec4899" stroke-width="2" />
+                            <path d="M 134 55 Q 152 69 134 83" fill="none" stroke="#6366f1" stroke-width="2"
+                                stroke-linecap="round" />
+                            <path d="M 146 47 Q 170 69 146 91" fill="none" stroke="#ec4899" stroke-width="2"
+                                stroke-linecap="round" opacity="0.85" />
+                            <path d="M 158 39 Q 188 69 158 99" fill="none" stroke="#6366f1" stroke-width="2"
+                                stroke-linecap="round" opacity="0.6" />
+                            <path
+                                d="M 210 105 C 210 82, 198 70, 192 58 C 206 60, 214 72, 216 90 C 222 72, 232 60, 245 56 C 238 74, 224 84, 222 105 Z"
+                                fill="url(#agriGrad)" opacity="0.9" />
+                            <line x1="185" y1="108" x2="252" y2="108" stroke="#94a3b8" stroke-width="2"
+                                stroke-linecap="round" />
+                            <circle cx="236" cy="34" r="12" fill="rgba(236,72,153,0.18)" stroke="#ec4899"
+                                stroke-width="1.5" />
+                            <path d="M 232 34 L 240 34 M 236 30 L 236 38" stroke="#f1f5f9" stroke-width="1.5"
+                                stroke-linecap="round" />
+                        </svg>
                     </div>
-                    <div class="project-info">
-                        <h3>Personal Budget Manager</h3>
-                        <p>A comprehensive MERN stack application for tracking expenses and managing personal finances
-                            effectively with visual analytics.</p>
-                        <div class="tags">
-                            <span>MongoDB</span>
-                            <span>Express</span>
-                            <span>React</span>
-                            <span>Node</span>
+                    <div class="project-content">
+                        <h3>AgriDetect – Ultrasonic Weed Detector System</h3>
+                        <p class="project-desc">Designed and implemented an ultrasonic weed detection system using
+                            sensors and microcontroller-based processing.</p>
+                        <div class="project-features">
+                            <h4>Key Features</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Distance-based weed detection logic</li>
+                                <li><i class="fas fa-check"></i> Real-time alerts</li>
+                                <li><i class="fas fa-check"></i> Reduced manual inspection and maintenance effort</li>
+                            </ul>
                         </div>
-                        <a href="https://budgetbuddy-1617.vercel.app/" class="btn-link">View Project <i
-                                class="fas fa-arrow-right"></i></a>
+                        <div class="tags">
+                            <span>ESP32 Microcontroller</span>
+                            <span>Ultrasonic Sensor</span>
+                            <span>Embedded C</span>
+                            <span>ThingShow (Cloud)</span>
+                            <span>Buzzer</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: FloodGuard -->
+                <article class="project-card">
+                    <div class="project-visual">
+                        <span class="project-category-badge hardware">
+                            <i class="fas fa-broadcast-tower"></i> Hardware Project
+                        </span>
+                        <svg class="project-illustration" viewBox="0 0 280 140" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <defs>
+                                <linearGradient id="floodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#6366f1" />
+                                    <stop offset="100%" stop-color="#ec4899" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="30" y="54" width="54" height="44" rx="7" fill="#0f172a" stroke="url(#floodGrad)"
+                                stroke-width="2" />
+                            <line x1="57" y1="54" x2="57" y2="26" stroke="#ec4899" stroke-width="2.5"
+                                stroke-linecap="round" />
+                            <circle cx="57" cy="24" r="4" fill="#ec4899" />
+                            <path d="M 70 20 Q 82 32 70 44" fill="none" stroke="#6366f1" stroke-width="2"
+                                stroke-linecap="round" />
+                            <path d="M 80 14 Q 98 32 80 50" fill="none" stroke="#ec4899" stroke-width="2"
+                                stroke-linecap="round" opacity="0.8" />
+                            <text x="57" y="80" text-anchor="middle" fill="#f1f5f9" font-size="10"
+                                font-family="Poppins, sans-serif" font-weight="700">SOS</text>
+                            <path d="M 100 32 L 178 32" stroke="#6366f1" stroke-width="2" stroke-dasharray="5 5" />
+                            <path
+                                d="M 206 32 C 194 32, 184 42, 184 54 C 184 71, 206 94, 206 94 C 206 94, 228 71, 228 54 C 228 42, 218 32, 206 32 Z"
+                                fill="none" stroke="url(#floodGrad)" stroke-width="2.5" />
+                            <circle cx="206" cy="54" r="6" fill="#ec4899" />
+                            <path d="M 20 112 Q 55 102 90 112 T 160 112 T 230 112 T 265 112" fill="none"
+                                stroke="#6366f1" stroke-width="2" opacity="0.7" />
+                            <path d="M 20 122 Q 55 112 90 122 T 160 122 T 230 122 T 265 122" fill="none"
+                                stroke="#ec4899" stroke-width="1.5" opacity="0.5" />
+                        </svg>
+                    </div>
+                    <div class="project-content">
+                        <h3>FloodGuard – Offline GPS-Based LoRa Emergency Communication System</h3>
+                        <p class="project-desc">Developed an offline emergency communication system to transmit SOS
+                            alerts and real-time GPS locations during flood disasters without requiring cellular or
+                            internet connectivity.</p>
+                        <div class="project-features">
+                            <h4>Key Features</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Long-range LoRa communication</li>
+                                <li><i class="fas fa-check"></i> GPS-based victim tracking</li>
+                                <li><i class="fas fa-check"></i> Last-known GPS location storage</li>
+                                <li><i class="fas fa-check"></i> LCD status display</li>
+                                <li><i class="fas fa-check"></i> Google Maps location generation</li>
+                            </ul>
+                        </div>
+                        <div class="tags">
+                            <span>ESP32 Microcontroller</span>
+                            <span>SX1278 LoRa Module</span>
+                            <span>Neo-6M GPS Module</span>
+                            <span>Embedded C</span>
+                            <span>I2C LCD</span>
+                            <span>TinyGPS++ Library</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: Personal Budget Manager -->
+                <article class="project-card">
+                    <div class="project-visual">
+                        <span class="project-category-badge software">
+                            <i class="fas fa-laptop-code"></i> Software Project
+                        </span>
+                        <svg class="project-illustration" viewBox="0 0 280 140" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <defs>
+                                <linearGradient id="budgetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#6366f1" />
+                                    <stop offset="100%" stop-color="#ec4899" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="34" y="22" width="212" height="96" rx="10" fill="#0f172a" stroke="url(#budgetGrad)"
+                                stroke-width="2" />
+                            <rect x="46" y="34" width="76" height="32" rx="6" fill="rgba(99,102,241,0.16)" />
+                            <line x1="56" y1="45" x2="98" y2="45" stroke="#94a3b8" stroke-width="2.5"
+                                stroke-linecap="round" />
+                            <line x1="56" y1="56" x2="110" y2="56" stroke="#ec4899" stroke-width="3.5"
+                                stroke-linecap="round" />
+                            <rect x="46" y="74" width="76" height="32" rx="6" fill="rgba(236,72,153,0.12)" />
+                            <line x1="56" y1="85" x2="94" y2="85" stroke="#94a3b8" stroke-width="2.5"
+                                stroke-linecap="round" />
+                            <line x1="56" y1="96" x2="106" y2="96" stroke="#6366f1" stroke-width="3.5"
+                                stroke-linecap="round" />
+                            <rect x="138" y="72" width="16" height="34" rx="3" fill="#6366f1" />
+                            <rect x="162" y="54" width="16" height="52" rx="3" fill="#8b5cf6" />
+                            <rect x="186" y="64" width="16" height="42" rx="3" fill="#ec4899" />
+                            <rect x="210" y="42" width="16" height="64" rx="3" fill="url(#budgetGrad)" />
+                        </svg>
+                    </div>
+                    <div class="project-content">
+                        <h3>Personal Budget Manager</h3>
+                        <p class="project-desc">Developed a frontend web application to manage personal budgets,
+                            categorized expenses and real-time financial balances.</p>
+                        <div class="project-features">
+                            <h4>Key Features</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Authentication</li>
+                                <li><i class="fas fa-check"></i> Budget management</li>
+                                <li><i class="fas fa-check"></i> Categorized expense tracking</li>
+                                <li><i class="fas fa-check"></i> localStorage data persistence</li>
+                                <li><i class="fas fa-check"></i> Responsive user interface</li>
+                                <li><i class="fas fa-check"></i> Dynamic financial calculations</li>
+                            </ul>
+                        </div>
+                        <div class="tags">
+                            <span>React (JavaScript)</span>
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>localStorage</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://budgetbuddy-1617.vercel.app/" target="_blank" rel="noopener noreferrer"
+                                class="btn-link">View Project <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Internships Section -->
+    <section id="internships" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Industrial <span>Internships</span></h2>
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <h3>Schneider Electric India Private Limited</h3>
+                                <span class="role-badge">Industrial Intern</span>
+                            </div>
+                            <div class="timeline-meta">
+                                <span><i class="fas fa-calendar-alt"></i> January 2025 – February 2025</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Coimbatore, Tamil Nadu</span>
+                            </div>
+                        </div>
+                        <ul class="timeline-list">
+                            <li>Designed and automated a Safety Passport and Equipment Handling Tracker using Excel VBA.
+                            </li>
+                            <li>Managed structured trainee and equipment data.</li>
+                            <li>Integrated global equipment categorization and multi-location tracking using Excel and
+                                SharePoint.</li>
+                        </ul>
                     </div>
                 </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <h3>BYD India Private Limited</h3>
+                                <span class="role-badge">Industrial Intern</span>
+                            </div>
+                            <div class="timeline-meta">
+                                <span><i class="fas fa-calendar-alt"></i> May 2025</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</span>
+                            </div>
+                        </div>
+                        <ul class="timeline-list">
+                            <li>Observed electric vehicle and battery assembly operations.</li>
+                            <li>Studied motor, axle and battery integration.</li>
+                            <li>Learned LFP battery architecture and IP67/IP68 safety standards.</li>
+                            <li>Observed spot welding automation.</li>
+                            <li>Studied Incoming QC, In-Process QC, Final QC, rework and finished goods handling.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <h3>Tech7 Automation Systems India Private Limited</h3>
+                                <span class="role-badge">Industrial Intern</span>
+                            </div>
+                            <div class="timeline-meta">
+                                <span><i class="fas fa-calendar-alt"></i> April 2026 – May 2026</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Coimbatore, Tamil Nadu</span>
+                            </div>
+                        </div>
+                        <ul class="timeline-list">
+                            <li>Studied industrial electrical panel manufacturing and automation systems.</li>
+                            <li>Learned HT/LT panels and protection systems.</li>
+                            <li>Studied PCC, MCC, APFC, VCB, PLC and Soft Starter panels.</li>
+                            <li>Examined relays, contactors, MCCB, ACB, CT and busbar arrangements.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <h3>Welltech Control Systems</h3>
+                                <span class="role-badge">Industrial Intern</span>
+                            </div>
+                            <div class="timeline-meta">
+                                <span><i class="fas fa-calendar-alt"></i> May 2026 – June 2026</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Coimbatore, Tamil Nadu</span>
+                            </div>
+                        </div>
+                        <ul class="timeline-list">
+                            <li>Studied industrial control panel design and manufacturing.</li>
+                            <li>Learned DOL, Star-Delta and ATS panels.</li>
+                            <li>Examined relays, contactors, MCCB/MCB, CTs, thermistors and timer relays.</li>
+                            <li>Studied PCR-10E controllers, panel wiring, testing procedures and industrial safety
+                                practices.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title">My <span>Education</span></h2>
+            <div class="education-grid">
+
+                <div class="education-card">
+                    <div class="edu-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="edu-details">
+                        <span class="edu-duration"><i class="fas fa-calendar-alt"></i> 2023 – 2027</span>
+                        <h3>Sri Krishna College of Technology</h3>
+                        <p class="edu-degree">B.E. Electronics and Communication Engineering</p>
+                        <p class="edu-location"><i class="fas fa-map-marker-alt"></i> Coimbatore, Tamil Nadu</p>
+                        <span class="edu-score">CGPA: 8.18</span>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <div class="edu-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="edu-details">
+                        <span class="edu-duration"><i class="fas fa-calendar-alt"></i> 2022 – 2023</span>
+                        <h3>Sri Sundareswara Vidyasala Matric Higher Secondary School</h3>
+                        <p class="edu-degree">Higher Secondary Certificate (XII)</p>
+                        <p class="edu-location"><i class="fas fa-map-marker-alt"></i> Melur, Madurai</p>
+                        <span class="edu-score">Percentage: 94.5%</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">My <span>Certifications</span></h2>
+            <div class="certifications-grid">
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Cisco Networking Academy</h3>
+                    </div>
+                    <ul class="cert-list">
+                        <li><i class="fas fa-certificate"></i> Introduction to Cybersecurity</li>
+                        <li><i class="fas fa-certificate"></i> Python Essentials 1</li>
+                        <li><i class="fas fa-certificate"></i> Python Essentials 2</li>
+                    </ul>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-icon"><i class="fas fa-university"></i></div>
+                        <h3>NPTEL</h3>
+                    </div>
+                    <ul class="cert-list">
+                        <li><i class="fas fa-certificate"></i> Effective Learning for Professional Development</li>
+                        <li><i class="fas fa-certificate"></i> Developing Soft Skills and Personality</li>
+                    </ul>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-icon"><i class="fas fa-award"></i></div>
+                        <h3>Infosys Springboard</h3>
+                    </div>
+                    <ul class="cert-list">
+                        <li><i class="fas fa-certificate"></i> Electronics Course</li>
+                        <li><i class="fas fa-certificate"></i> Java Foundation Certificate</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
+        <div class="container">
+            <h2 class="section-title">Key <span>Achievements</span></h2>
+            <div class="achievements-grid">
+
+                <div class="achievement-card">
+                    <div class="achievement-top">
+                        <div class="achievement-icon"><i class="fas fa-trophy"></i></div>
+                        <span class="achievement-badge"><i class="fas fa-star"></i> ₹2,00,000 Scholarship</span>
+                    </div>
+                    <h3>Reliance Foundation Scholarship</h3>
+                    <ul class="achievement-details">
+                        <li>Awarded ₹2,00,000 scholarship for academic excellence.</li>
+                        <li>Scholarship covering four years of undergraduate study.</li>
+                    </ul>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-top">
+                        <div class="achievement-icon"><i class="fas fa-medal"></i></div>
+                        <span class="achievement-badge"><i class="fas fa-award"></i> Second Prize • 2024</span>
+                    </div>
+                    <h3>National Science Day Quiz Competition</h3>
+                    <ul class="achievement-details">
+                        <li>Secured Second Prize.</li>
+                        <li>Organized at Thiagarajar College of Engineering.</li>
+                        <li>Year: 2024 &bull; Cash Prize: ₹2,000.</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </section>
@@ -168,14 +614,31 @@
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h3>Email</h3>
-                            <a href="mailto:haribala112006@gmail.com" class="contact-email-link">haribala112006@gmail.com</a>
+                            <a href="mailto:haribala112006@gmail.com"
+                                class="contact-email-link">haribala112006@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <h3>GitHub</h3>
+                            <a href="https://github.com/hariharan-1607" target="_blank" rel="noopener noreferrer"
+                                class="contact-email-link">github.com/hariharan-1607</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin-in"></i>
+                        <div>
+                            <h3>LinkedIn</h3>
+                            <a href="https://linkedin.com/in/haribala1617" target="_blank" rel="noopener noreferrer"
+                                class="contact-email-link">linkedin.com/in/haribala1617</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h3>Location</h3>
-                            <p>Available for Remote Work</p>
+                            <p>Coimbatore, Tamil Nadu, India</p>
                         </div>
                     </div>
                 </div>
@@ -203,12 +666,18 @@
     <!-- Footer -->
     <footer>
         <div class="container footer-container">
-            <p>&copy; 2025 Hariharan. Built with <i class="fas fa-heart"></i> and Code.</p>
-            <div class="social-links">
-                <a href="https://github.com/hariharan-1607"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/haribala1617"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+            <div class="footer-brand">
+                <h3>Hariharan M<span>.</span></h3>
+                <p class="footer-role">Aspiring Software Developer | ECE Undergraduate</p>
             </div>
+            <div class="social-links">
+                <a href="https://github.com/hariharan-1607" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/haribala1617" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:haribala112006@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy; <span id="current-year"></span> Hariharan M. Built with <i class="fas fa-heart"></i> and Code.</p>
         </div>
     </footer>
 

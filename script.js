@@ -1,6 +1,7 @@
 // Sticky Navbar
 window.addEventListener('scroll', function () {
     const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
     if (window.scrollY > 20) {
         navbar.style.background = 'rgba(15, 28, 48, 0.95)';
         navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
@@ -15,27 +16,36 @@ window.addEventListener('scroll', function () {
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 
-hamburger.addEventListener('click', () => {
+function toggleMobileMenu() {
+    if (!hamburger || !navLinks) return;
     hamburger.classList.toggle('active');
     navLinks.classList.toggle('active');
 
-    // Toggle body scroll
     if (navLinks.classList.contains('active')) {
         document.body.style.overflow = 'hidden';
     } else {
         document.body.style.overflow = 'initial';
     }
-});
+}
 
-// Auto-hide mobile menu on mouse leave
-navLinks.addEventListener('mouseleave', () => {
-    if (navLinks.classList.contains('active')) {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        document.body.style.overflow = 'initial';
-    }
-});
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', toggleMobileMenu);
+    hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleMobileMenu();
+        }
+    });
 
+    // Auto-hide mobile menu on mouse leave
+    navLinks.addEventListener('mouseleave', () => {
+        if (navLinks.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = 'initial';
+        }
+    });
+}
 
 // Smooth Scrolling for Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -49,8 +59,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
 
         // Close mobile menu if open
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
+        if (hamburger) hamburger.classList.remove('active');
+        if (navLinks) navLinks.classList.remove('active');
         document.body.style.overflow = 'initial';
 
         targetElement.scrollIntoView({
@@ -59,7 +69,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form Submission (Direct Email via Webmail & Mailto)
+// Active Navigation Link Highlighting on Scroll
+const pageSections = document.querySelectorAll('header[id], section[id]');
+const navItems = document.querySelectorAll('.nav-links a.nav-link');
+
+function updateActiveNavLink() {
+    let currentSectionId = 'home';
+    const scrollMarker = window.scrollY + 140;
+
+    pageSections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        if (scrollMarker >= top && scrollMarker < top + height) {
+            currentSectionId = sec.getAttribute('id');
+        }
+    });
+
+    // If scrolled right to the bottom of the page, highlight Contact
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 20) {
+        const lastSection = pageSections[pageSections.length - 1];
+        if (lastSection) currentSectionId = lastSection.getAttribute('id');
+    }
+
+    navItems.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSectionId}`) {
+            link.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', updateActiveNavLink, { passive: true });
+window.addEventListener('load', updateActiveNavLink);
+
+// Form Submission (Direct Email via Webmail & Mailto - Preserved)
 const contactForm = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
 
@@ -71,7 +114,15 @@ if (contactForm) {
         const email = document.getElementById('email').value.trim();
         const message = document.getElementById('message').value.trim();
 
-        if (!name || !email || !message) return;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!name || !email || !message || !emailPattern.test(email)) {
+            if (formStatus) {
+                formStatus.className = 'form-status';
+                formStatus.style.display = 'block';
+                formStatus.innerHTML = `<p class="status-desc" style="margin-bottom:0; color:#f87171;">Please enter a valid name, email address, and message.</p>`;
+            }
+            return;
+        }
 
         const recipientEmail = "haribala112006@gmail.com";
         const subjectText = `Portfolio Message from ${name}`;
@@ -145,7 +196,7 @@ if (contactForm) {
 
 // Intersection Observer for Scroll Animations
 const observerOptions = {
-    threshold: 0.2
+    threshold: 0.1
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -158,22 +209,26 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Add animation classes to elements
-document.querySelectorAll('.section-title, .about-wrapper, .skill-card, .project-card').forEach(el => {
+document.querySelectorAll('.section-title, .about-wrapper, .skill-category-card, .project-card, .timeline-item, .education-card, .cert-card, .achievement-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'all 0.6s ease-out';
     observer.observe(el);
 });
 
-// Section Focus/Blur Observer
+// Section Focus/Blur Observer (handles both compact and tall multi-card sections cleanly)
 const sectionObserverOptions = {
-    threshold: 0.3, // Percentage of section visible to trigger focus
-    rootMargin: "-10% 0px -10% 0px" // Shrink intersection area for better focus
+    threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+    rootMargin: "-10% 0px -10% 0px"
 };
 
 const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        const visibleHeight = entry.intersectionRect ? entry.intersectionRect.height : 0;
+        const rootHeight = entry.rootBounds ? entry.rootBounds.height : window.innerHeight * 0.8;
+        const isFocused = entry.isIntersecting && (entry.intersectionRatio >= 0.25 || visibleHeight >= rootHeight * 0.35);
+
+        if (isFocused) {
             entry.target.classList.remove('inactive-section');
         } else {
             entry.target.classList.add('inactive-section');
@@ -186,15 +241,13 @@ document.querySelectorAll('section').forEach(section => {
     sectionObserver.observe(section);
 });
 
-// Click Interaction for Skills and Projects (Touch/Mobile support)
-const interactiveCards = document.querySelectorAll('.skill-card, .project-card');
+// Click Interaction for Interactive Cards (Touch/Mobile support)
+const interactiveCards = document.querySelectorAll('.skill-category-card, .project-card');
 
 interactiveCards.forEach(card => {
     card.addEventListener('click', () => {
-        // Toggle active class
         card.classList.toggle('active');
 
-        // Optional: Close other cards when one is opened
         interactiveCards.forEach(otherCard => {
             if (otherCard !== card) {
                 otherCard.classList.remove('active');
@@ -211,11 +264,13 @@ const modalOverlay = document.querySelector('.modal-overlay');
 
 function openResumeModal(e) {
     if (e) e.preventDefault();
+    if (!resumeModal) return;
     resumeModal.classList.add('active');
     document.body.classList.add('modal-open');
 }
 
 function closeResumeModal() {
+    if (!resumeModal) return;
     resumeModal.classList.remove('active');
     document.body.classList.remove('modal-open');
 }
@@ -234,7 +289,13 @@ if (modalOverlay) {
 
 // Close modal on Escape key
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
+    if (e.key === 'Escape' && resumeModal && resumeModal.classList.contains('active')) {
         closeResumeModal();
     }
 });
+
+// Dynamic Copyright Year
+const currentYearEl = document.getElementById('current-year');
+if (currentYearEl) {
+    currentYearEl.textContent = new Date().getFullYear();
+}
