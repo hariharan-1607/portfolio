@@ -102,6 +102,133 @@ function updateActiveNavLink() {
 window.addEventListener('scroll', updateActiveNavLink, { passive: true });
 window.addEventListener('load', updateActiveNavLink);
 
+const RECIPIENT_EMAIL = "haribala112006@gmail.com";
+
+/**
+ * Build Gmail web compose and standard mailto URLs.
+ */
+function buildEmailLinks({ recipient = RECIPIENT_EMAIL, subjectText = "", bodyText = "" } = {}) {
+    const params = [];
+    if (subjectText) params.push(`su=${encodeURIComponent(subjectText)}`);
+    if (bodyText) params.push(`body=${encodeURIComponent(bodyText)}`);
+    const gmailQuery = params.length ? `&${params.join("&")}` : "";
+
+    const mailtoParams = [];
+    if (subjectText) mailtoParams.push(`subject=${encodeURIComponent(subjectText)}`);
+    if (bodyText) mailtoParams.push(`body=${encodeURIComponent(bodyText)}`);
+    const mailtoQuery = mailtoParams.length ? `?${mailtoParams.join("&")}` : "";
+
+    return {
+        gmailUrl: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}${gmailQuery}`,
+        mailtoUrl: `mailto:${recipient}${mailtoQuery}`
+    };
+}
+
+/**
+ * Open Gmail web compose on desktop or native mail app on mobile.
+ */
+function openEmailComposer(gmailUrl, mailtoUrl) {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        window.location.href = mailtoUrl;
+    } else {
+        // Open Gmail compose directly in a new tab (avoids about:blank freeze caused by conflicting mailto trigger)
+        const link = document.createElement('a');
+        link.href = gmailUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+/**
+ * Render an inline email status card with Gmail, Default Mail App, and Copy actions.
+ */
+function renderEmailStatus(container, { title, description, gmailUrl, mailtoUrl, copyLabel, textToCopy, dismissible = false }) {
+    if (!container) return;
+
+    const closeBtnMarkup = dismissible
+        ? `<button type="button" class="status-close-btn" aria-label="Close">&times;</button>`
+        : "";
+
+    container.classList.add('form-status', 'success');
+    container.style.display = 'block';
+    container.innerHTML = `
+        <div class="status-header">
+            <i class="fas fa-check-circle"></i>
+            <span>${title}</span>
+            ${closeBtnMarkup}
+        </div>
+        <p class="status-desc">${description}</p>
+        <div class="status-actions">
+            <a href="${gmailUrl}" target="_blank" rel="noopener noreferrer" class="status-btn primary">
+                <i class="fab fa-google"></i> Open in Gmail
+            </a>
+            <a href="${mailtoUrl}" class="status-btn">
+                <i class="fas fa-envelope"></i> Default Mail App
+            </a>
+            <button type="button" class="status-btn js-copy-btn">
+                <i class="fas fa-copy"></i> <span class="js-copy-text">${copyLabel}</span>
+            </button>
+        </div>
+    `;
+
+    const copyBtn = container.querySelector(".js-copy-btn");
+    if (copyBtn) {
+        copyBtn.addEventListener("click", function () {
+            const copyTextEl = container.querySelector(".js-copy-text");
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                if (copyTextEl) copyTextEl.textContent = "Copied!";
+                setTimeout(() => {
+                    if (copyTextEl) copyTextEl.textContent = copyLabel;
+                }, 2500);
+            }).catch(() => {
+                if (copyTextEl) copyTextEl.textContent = "Failed to copy";
+            });
+        });
+    }
+
+    const closeBtn = container.querySelector(".status-close-btn");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+            container.style.display = 'none';
+        });
+    }
+}
+
+// Quick Mail Icon Clicks (Home & Footer: Direct Gmail Compose + Interactive Fallback Options)
+[
+    { triggerId: "hero-mail-link", statusId: "hero-mail-status" },
+    { triggerId: "footer-mail-link", statusId: "footer-mail-status" }
+].forEach(({ triggerId, statusId }) => {
+    const mailLink = document.getElementById(triggerId);
+    const mailStatus = document.getElementById(statusId);
+    if (!mailLink) return;
+
+    mailLink.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const { gmailUrl, mailtoUrl } = buildEmailLinks({
+            recipient: RECIPIENT_EMAIL
+        });
+
+        openEmailComposer(gmailUrl, mailtoUrl);
+
+        renderEmailStatus(mailStatus, {
+            title: "Opening Email Composer...",
+            description: `Opening a new message to <strong>${RECIPIENT_EMAIL}</strong>. If your email didn't open automatically, choose an option below:`,
+            gmailUrl,
+            mailtoUrl,
+            copyLabel: "Copy Email",
+            textToCopy: RECIPIENT_EMAIL,
+            dismissible: true
+        });
+    });
+});
+
 // Form Submission (Direct Email via Webmail & Mailto - Preserved)
 const contactForm = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
@@ -124,73 +251,25 @@ if (contactForm) {
             return;
         }
 
-        const recipientEmail = "haribala112006@gmail.com";
         const subjectText = `Portfolio Message from ${name}`;
         const bodyText = `Name: ${name}\r\nEmail: ${email}\r\n\r\nMessage:\r\n${message}`;
 
-        const subject = encodeURIComponent(subjectText);
-        const body = encodeURIComponent(bodyText);
+        const { gmailUrl, mailtoUrl } = buildEmailLinks({
+            recipient: RECIPIENT_EMAIL,
+            subjectText,
+            bodyText
+        });
 
-        // Webmail direct compose URL (works flawlessly in browser without requiring an OS desktop mail client)
-        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipientEmail}&su=${subject}&body=${body}`;
-        const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+        openEmailComposer(gmailUrl, mailtoUrl);
 
-        // Detect mobile vs desktop
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-        if (isMobile) {
-            window.location.href = mailtoUrl;
-        } else {
-            // Open Gmail compose directly in a new tab (avoids about:blank freeze caused by conflicting mailto trigger)
-            const link = document.createElement('a');
-            link.href = gmailUrl;
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        // Show elegant in-form status with interactive fallbacks (no alert dialog)
-        if (formStatus) {
-            formStatus.className = 'form-status success';
-            formStatus.style.display = 'block';
-            formStatus.innerHTML = `
-                <div class="status-header">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Opening Email Composer...</span>
-                </div>
-                <p class="status-desc">Your message has been drafted for <strong>${recipientEmail}</strong>. If your email didn't open automatically, choose an option below:</p>
-                <div class="status-actions">
-                    <a href="${gmailUrl}" target="_blank" rel="noopener noreferrer" class="status-btn primary">
-                        <i class="fab fa-google"></i> Open in Gmail
-                    </a>
-                    <a href="${mailtoUrl}" class="status-btn">
-                        <i class="fas fa-envelope"></i> Default Mail App
-                    </a>
-                    <button type="button" class="status-btn" id="copy-msg-btn">
-                        <i class="fas fa-copy"></i> <span id="copy-text">Copy Message</span>
-                    </button>
-                </div>
-            `;
-
-            const copyBtn = document.getElementById("copy-msg-btn");
-            if (copyBtn) {
-                copyBtn.addEventListener("click", function () {
-                    const fullText = `To: ${recipientEmail}\nSubject: ${subjectText}\n\n${bodyText}`;
-                    navigator.clipboard.writeText(fullText).then(() => {
-                        const copyText = document.getElementById("copy-text");
-                        if (copyText) copyText.textContent = "Copied!";
-                        setTimeout(() => {
-                            if (copyText) copyText.textContent = "Copy Message";
-                        }, 2500);
-                    }).catch(() => {
-                        const copyText = document.getElementById("copy-text");
-                        if (copyText) copyText.textContent = "Failed to copy";
-                    });
-                });
-            }
-        }
+        renderEmailStatus(formStatus, {
+            title: "Opening Email Composer...",
+            description: `Your message has been drafted for <strong>${RECIPIENT_EMAIL}</strong>. If your email didn't open automatically, choose an option below:`,
+            gmailUrl,
+            mailtoUrl,
+            copyLabel: "Copy Message",
+            textToCopy: `To: ${RECIPIENT_EMAIL}\nSubject: ${subjectText}\n\n${bodyText}`
+        });
     });
 }
 
